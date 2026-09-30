@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComicCraft · AI Comic Creator</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero comic-box">
+      <p class="eyebrow">AI STORY STUDIO</p>
+      <h1>ComicCraft</h1>
+      <p class="lead">Turn one idea into a five-panel comic with narration, dialogue, artwork and a downloadable PDF.</p>
+    </section>
+
+    <section class="form-card comic-box">
+      <form id="comic-form" method="post" action="/generate">
+        <label>Story Prompt
+          <textarea name="story_prompt" maxlength="2000" required placeholder="A brave fox exploring an enchanted forest..."></textarea>
+        </label>
+        <div class="grid two">
+          <label>Main Character
+            <input name="character_name" maxlength="120" required placeholder="Fenn">
+          </label>
+          <label>Setting
+            <input name="setting" maxlength="200" required placeholder="Enchanted Forest">
+          </label>
+        </div>
+        <div class="grid two">
+          <label>Tone
+            <select name="tone" required>
+              <option value="Adventure">Adventure</option>
+              <option value="Funny">Funny</option>
+              <option value="Dramatic">Dramatic</option>
+              <option value="Mystery">Mystery</option>
+              <option value="Heartwarming">Heartwarming</option>
+            </select>
+          </label>
+          <label>Art Style
+            <select name="art_style" required>
+              <option value="Comic Book">Comic Book</option>
+              <option value="Anime">Anime</option>
+              <option value="Cartoon">Cartoon</option>
+              <option value="Realistic">Realistic</option>
+              <option value="Watercolor">Watercolor</option>
+            </select>
+          </label>
+        </div>
+        <button class="primary" type="submit">Generate My Comic</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="loading-overlay" class="loading-overlay" hidden>
+    <div class="loading-card comic-box">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2>Crafting your comic…</h2>
+      <p>Writing scenes, drawing panels and preparing the preview.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('comic-form').addEventListener('submit', () => {
+      document.getElementById('loading-overlay').hidden = false;
+    });
+  </script>
+</body>
+</html>

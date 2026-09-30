@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComicCraft · Your Comic</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="shell wide">
+    <header class="preview-header comic-box">
+      <p class="eyebrow">YOUR COMIC IS READY</p>
+      <h1>{{ request_data.character_name }}'s Adventure</h1>
+      <p>{{ request_data.story_prompt }}</p>
+      <div class="actions">
+        {% if result.pdf_path %}<a class="primary link-button" href="{{ result.pdf_path }}" download>Download PDF</a>{% endif %}
+        <a class="secondary link-button" href="/">Create Another Comic</a>
+      </div>
+      {% if result.export_warning %}<p class="warning">{{ result.export_warning }}</p>{% endif %}
+    </header>
+
+    <section class="panels">
+      {% for panel in result.panels %}
+      <article class="panel comic-box">
+        <div class="panel-number">PANEL {{ panel.panel_number }}</div>
+        <h2>{{ panel.title }}</h2>
+        <img src="{{ panel.image_path }}" alt="Illustration for panel {{ panel.panel_number }}: {{ panel.title }}">
+        <p class="scene">{{ panel.scene_description }}</p>
+        <p class="narration">{{ panel.narration }}</p>
+        {% if panel.dialogue %}<blockquote class="speech">{{ panel.dialogue }}</blockquote>{% endif %}
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
